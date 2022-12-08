@@ -14,15 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Mensajes(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // initialRoute: LoginPage.id,
-      // routes: {
-      //   LoginPage.id: (context) => LoginPage(),
-      // },
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Raleway'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: LoginPage.id,
+      routes: {
+        LoginPage.id: (context) => LoginPage(),
+      },
     );
   }
 }
