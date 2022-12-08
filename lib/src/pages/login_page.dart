@@ -25,54 +25,88 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          backgroundColor: Color(0xffe9dada),
           body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/loginLogo.png',
-                height: 300,
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.symmetric(horizontal: 40.0),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 40.0),
+                    child: Text(
+                      'Wakala.',
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Pink Acapella'),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  textAlign: TextAlign.start,
-                ),
+                  Image.asset(
+                    'assets/images/repugnante.png',
+                    height: 200,
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  _userTextField(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  _passwordTextField(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _buttonLogin(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(horizontal: 80.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: <Widget>[
+                                new Text("By",
+                                    style: TextStyle(
+                                        fontFamily: 'Delight Snowy',
+                                        fontSize: 25))
+                              ],
+                            ),
+                          ),
+                          new Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  'Benjamín Fernández Vera',
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Delight Snowy'),
+                                  textAlign: TextAlign.start,
+                                ),
+                                Text(
+                                  'Mauricio Furniel Campos',
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Delight Snowy'),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                ],
               ),
-              SizedBox(
-                height: 15.0,
-              ),
-              _userTextField(),
-              SizedBox(
-                height: 15,
-              ),
-              _passwordTextField(),
-              SizedBox(
-                height: 20,
-              ),
-              _buttonLogin(),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Derechos reservados a MBFF S.A',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.normal,
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 
@@ -80,31 +114,35 @@ class _LoginPageState extends State<LoginPage> {
       RoundedLoadingButtonController _buttonController) async {
     final response = await LoginService().validar(email, password);
 
-    if (response.statusCode == 200) {
-      //almacenar de alguna manera el login
-      String name = jsonDecode(response.body);
-      await pref.setString('usuario', email);
-      await pref.setString('nombre', name);
+    //Por ahora, luego se borra
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Mensajes()));
+    _btnController.success();
+    // if (response.statusCode == 200) {
+    //   //almacenar de alguna manera el login
+    //   String name = jsonDecode(response.body);
+    //   await pref.setString('usuario', email);
+    //   await pref.setString('nombre', name);
 
-      Global.login = email;
-      Global.name = name;
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Mensajes()));
-      _btnController.success();
-    } else {
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.error,
-        title: 'Oops...',
-        text: 'Algo ha salido mal :c',
-        loopAnimation: false,
-        onConfirmBtnTap: () {
-          _btnController.reset();
-          Navigator.pop(context);
-        },
-      );
-      _btnController.error();
-    }
+    //   Global.login = email;
+    //   Global.name = name;
+    //   Navigator.push(
+    //       context, MaterialPageRoute(builder: (context) => Mensajes()));
+    //   _btnController.success();
+    // } else {
+    //   CoolAlert.show(
+    //     context: context,
+    //     type: CoolAlertType.error,
+    //     title: 'Oops...',
+    //     text: 'Algo ha salido mal :c',
+    //     loopAnimation: false,
+    //     onConfirmBtnTap: () {
+    //       _btnController.reset();
+    //       Navigator.pop(context);
+    //     },
+    //   );
+    //   _btnController.error();
+    // }
   }
 
   String? login_guardado = "";
@@ -149,6 +187,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: TextField(
             controller: emailController,
+            style: TextStyle(fontFamily: 'Delight Snowy'),
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
@@ -168,6 +207,7 @@ class _LoginPageState extends State<LoginPage> {
             controller: passwordController,
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
+            style: TextStyle(fontFamily: 'Delight Snowy'),
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock),
                 hintText: 'Contraseña',
@@ -204,9 +244,14 @@ class _LoginPageState extends State<LoginPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return RoundedLoadingButton(
-        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
+        child: Text('Iniciar Sesión',
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Pink Acapella',
+                fontSize: 20)),
         controller: _btnController,
         onPressed: _doSomething,
+        color: Color(0xff2d333f),
       );
     });
   }
