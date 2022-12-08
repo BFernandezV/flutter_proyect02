@@ -69,6 +69,7 @@ class _MensajesState extends State<Mensajes> {
                               ],
                             ),
                             // Padding(padding: const EdgeInsets.all(value)),
+                            // Blocks(MainAxisAlignment.spaceBetween),
                             FloatingActionButton(
                               child: Icon(Icons.arrow_right),
                               elevation: 10.0,
