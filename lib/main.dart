@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_test/src/pages/login_page.dart';
 import 'package:login_test/src/pages/side_bar.dart';
+import 'package:login_test/src/pages/mensajes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,12 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: Mensajes(),
+      home: Mensajes(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: LoginPage.id,
-      routes: {
-        LoginPage.id: (context) => LoginPage(),
-      },
+      // initialRoute: LoginPage.id,
+      // routes: {
+      //   LoginPage.id: (context) => LoginPage(),
+      // },
     );
   }
 }

@@ -15,7 +15,8 @@ class Mensajes extends StatefulWidget {
 }
 
 class _MensajesState extends State<Mensajes> {
-  final url = Uri.parse("https://40fd422c6d4d.sa.ngrok.io/api/mensajes");
+  final url =
+      Uri.parse("https://94d890b81bf7.sa.ngrok.io/api/wuakalasApi/Getwuakalas");
   late Future<List<Mensaje>> mensajes;
 
   @override
@@ -46,23 +47,39 @@ class _MensajesState extends State<Mensajes> {
                       elevation: 10,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: Column(
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // SizedBox(height: 10),
-                            Text(snap.data![i].fecha),
-                            Text(snap.data![i].login),
-                            Text(
-                              snap.data![i].title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
+                            Column(
+                              children: [
+                                Text(
+                                  snap.data![i].title,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text("por: @" + snap.data![i].login),
+                                    Text(snap.data![i].fecha),
+                                  ],
+                                ),
+                              ],
                             ),
-                            Text(
-                              snap.data![i].description,
-                              style: TextStyle(),
+                            // Padding(padding: const EdgeInsets.all(value)),
+                            FloatingActionButton(
+                              child: Icon(Icons.arrow_right),
+                              elevation: 10.0,
+                              backgroundColor: Colors.amber,
+                              onPressed: () {},
                             ),
+
+                            // Text(
+                            //   snap.data![i].description,
+                            //   style: TextStyle(),
+                            // ),
                             // SizedBox(height: 10),
                             // Divider(),
                           ],
