@@ -127,13 +127,29 @@ class _MensajesState extends State<Mensajes> {
   }
 
   Future<List<Mensaje>> getmensajes() async {
-    final res = await http.get(url);
-    final lista = List.from(jsonDecode(res.body));
-    List<Mensaje> mensajes = [];
-    lista.forEach((element) {
-      final Mensaje user = Mensaje.fromJson(element);
-      mensajes.add(user);
-    });
+    // final res = await http.get(url);
+    // final lista = List.from(jsonDecode(res.body));
+    // List<Mensaje> mensajes = [];
+    // lista.forEach((element) {
+    //   final Mensaje user = Mensaje.fromJson(element);
+    //   mensajes.add(user);
+    // });
+    List<Mensaje> mensajes = [
+      Mensaje(fecha: "02/03/2022", id: 0, login: "Benjamin", title: "Primero"),
+      Mensaje(fecha: "02/03/2022", id: 1, login: "Mauricio", title: "Segundo"),
+      Mensaje(fecha: "02/03/2022", id: 2, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 3, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 4, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 5, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 6, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 7, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 8, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 9, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 10, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 11, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 12, login: "Jorge", title: "Tercero"),
+      Mensaje(fecha: "02/03/2022", id: 13, login: "Jorge", title: "Tercero"),
+    ];
     return mensajes;
   }
 }

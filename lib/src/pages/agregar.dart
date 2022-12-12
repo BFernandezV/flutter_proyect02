@@ -35,29 +35,49 @@ class _AgregarState extends State<Agregar> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Envía tu mensaje'),
-        ),
-        drawer: NavBar(),
+        backgroundColor: Color(0xffe9dada),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25.0),
+            padding: const EdgeInsets.all(25.0),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: 15.0,
+                  Title(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    child: Text(
+                      "Lugar donde es la Cuestion",
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Color.fromARGB(255, 6, 25, 237),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Pink Acapella'),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  _titulo(),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  // SizedBox(
+                  //   height: 25.0,
+                  // ),
                   _descripcion(),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  // SizedBox(
+                  //   height: 15.0,
+                  // ),
                   _button_enviar(),
+                  // SizedBox(
+                  //   height: 15.0,
+                  // ),
+                  RoundedLoadingButton(
+                    height: MediaQuery.of(context).size.height.round() * 0.099,
+                    borderRadius: 0,
+                    color: Color(0xffe9dada),
+                    child: Text('Comentar Wakala',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 140, 0),
+                            fontFamily: 'Pink Acapella',
+                            fontSize: 20)),
+                    controller: _btnController,
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),
@@ -78,9 +98,10 @@ class _AgregarState extends State<Agregar> {
     //return type is OutlineInputBorder
     return OutlineInputBorder(
         //Outline border type for TextFeild
+
         borderRadius: BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
-          color: Colors.redAccent,
+          color: Color.fromARGB(255, 255, 255, 255),
           width: 3,
         ));
   }
@@ -110,7 +131,9 @@ class _AgregarState extends State<Agregar> {
             controller: descriptionController,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                hintText: 'Descripción', border: myinputborder()),
+              hintText: 'Descripción',
+              border: myinputborder(),
+            ),
             onChanged: (value) {}),
       );
     });
@@ -143,7 +166,14 @@ class _AgregarState extends State<Agregar> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return RoundedLoadingButton(
-        child: Text('Enviar mensaje', style: TextStyle(color: Colors.white)),
+        borderRadius: 0,
+        height: MediaQuery.of(context).size.height.round() * 0.099,
+        color: Color(0xffe9dada),
+        child: Text('Enviar mensaje',
+            style: TextStyle(
+                color: Color.fromARGB(255, 255, 140, 0),
+                fontFamily: 'Pink Acapella',
+                fontSize: 20)),
         controller: _btnController,
         onPressed: _doSomething,
       );
