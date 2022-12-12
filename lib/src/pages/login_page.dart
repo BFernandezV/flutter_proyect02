@@ -115,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
     final response = await LoginService().validar(email, password);
 
     //Por ahora, luego se borra
+    _btnController.reset();
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Mensajes()));
     _btnController.success();
