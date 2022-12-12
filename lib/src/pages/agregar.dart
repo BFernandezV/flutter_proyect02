@@ -52,17 +52,17 @@ class _AgregarState extends State<Agregar> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 25.0,
-                  // ),
+                  SizedBox(
+                    height: 25.0,
+                  ),
                   _descripcion(),
-                  // SizedBox(
-                  //   height: 15.0,
-                  // ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   _button_enviar(),
-                  // SizedBox(
-                  //   height: 15.0,
-                  // ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   RoundedLoadingButton(
                     height: MediaQuery.of(context).size.height.round() * 0.099,
                     borderRadius: 0,
