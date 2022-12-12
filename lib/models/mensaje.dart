@@ -18,3 +18,17 @@ class Mensaje {
         title: json["sector"]);
   }
 }
+
+class Comentarios {
+  String nombre;
+  String comentario;
+  String autor;
+
+  Comentarios(
+      {required this.nombre, required this.comentario, required this.autor});
+
+  factory Comentarios.fromJson(Map json) {
+    return Comentarios(
+        nombre: json["nombre"], comentario: json["id"], autor: json["autor"]);
+  }
+}
