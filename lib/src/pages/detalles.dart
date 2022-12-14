@@ -11,7 +11,7 @@ class Lugares extends StatefulWidget {
 }
 
 class _LugaresState extends State<Lugares> {
-  late Future<List<Mensaje>> mensajes;
+  late Future<List<Mensaje>> comments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
