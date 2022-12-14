@@ -52,7 +52,7 @@ class _LugaresState extends State<Lugares> {
                   MaterialButton(
                       child: Image.asset(
                         'assets/images/repugnante.png',
-                        height: 200,
+                        height: 130,
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -63,7 +63,7 @@ class _LugaresState extends State<Lugares> {
                   MaterialButton(
                       child: Image.asset(
                         'assets/images/repugnante.png',
-                        height: 200,
+                        height: 130,
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -83,12 +83,12 @@ class _LugaresState extends State<Lugares> {
             // )),
             Center(
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     MaterialButton(
-                      height: 60,
+                      height: 50,
                       minWidth: 25,
                       disabledColor: Colors.amber,
                       child: Text("Sigue ahi? (30)"),
@@ -102,7 +102,7 @@ class _LugaresState extends State<Lugares> {
                       width: 55,
                     ),
                     MaterialButton(
-                      height: 60.0,
+                      height: 50.0,
                       minWidth: 25,
                       disabledColor: Colors.amber,
                       child: Text("Ya no esta (1)"),

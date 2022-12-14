@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:login_test/src/pages/agregar.dart';
+import 'package:login_test/src/pages/detalles.dart';
+import 'package:login_test/src/pages/detallesfotos.dart';
 import 'package:login_test/src/pages/mensajes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -115,8 +118,8 @@ class _LoginPageState extends State<LoginPage> {
     final response = await LoginService().validar(email, password);
 
     //Por ahora, luego se borra
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Mensajes()));
+    _btnController.reset();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Agregar()));
     _btnController.success();
     // if (response.statusCode == 200) {
     //   //almacenar de alguna manera el login

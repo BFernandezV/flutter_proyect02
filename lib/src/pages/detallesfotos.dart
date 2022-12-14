@@ -37,7 +37,7 @@ class _FotoLugarState extends State<FotoLugar> {
               children: [
                 Image.asset(
                   'assets/images/repugnante.png',
-                  height: 400,
+                  height: 300,
                 ),
               ],
             ),

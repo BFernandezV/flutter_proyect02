@@ -9,9 +9,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'login_page.dart';
-import 'mensajes.dart';
-
 class Agregar extends StatefulWidget {
   const Agregar({super.key});
 
@@ -55,17 +52,17 @@ class _AgregarState extends State<Agregar> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 25.0,
-                  // ),
+                  SizedBox(
+                    height: 25.0,
+                  ),
                   _descripcion(),
-                  // SizedBox(
-                  //   height: 15.0,
-                  // ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   _button_enviar(),
-                  // SizedBox(
-                  //   height: 15.0,
-                  // ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   RoundedLoadingButton(
                     height: MediaQuery.of(context).size.height.round() * 0.099,
                     borderRadius: 0,
