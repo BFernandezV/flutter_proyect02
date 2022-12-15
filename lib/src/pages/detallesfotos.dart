@@ -55,10 +55,7 @@ class _FotoLugarState extends State<FotoLugar> {
                       splashColor: Color.fromARGB(255, 255, 7, 226),
                       color: Color(0xffe9dada),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Lugares()),
-                        );
+                        Navigator.pop(context);
                       }),
                 ],
               ),
