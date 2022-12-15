@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Raleway'),
-      home: Mensajes(),
+      home: LoginPage(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // initialRoute: LoginPage.id,
       // routes: {
