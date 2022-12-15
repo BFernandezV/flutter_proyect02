@@ -4,7 +4,9 @@ import 'package:login_test/src/pages/detallesfotos.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class Lugares extends StatefulWidget {
-  const Lugares({super.key});
+  const Lugares({Key? key, required this.userID}) : super(key: key);
+
+  final String userID;
 
   @override
   State<Lugares> createState() => _LugaresState();

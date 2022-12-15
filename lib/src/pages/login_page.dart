@@ -118,34 +118,36 @@ class _LoginPageState extends State<LoginPage> {
     final response = await LoginService().validar(email, password);
 
     //Por ahora, luego se borra
-    _btnController.reset();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Agregar()));
-    _btnController.success();
-    // if (response.statusCode == 200) {
-    //   //almacenar de alguna manera el login
-    //   String name = jsonDecode(response.body);
-    //   await pref.setString('usuario', email);
-    //   await pref.setString('nombre', name);
 
-    //   Global.login = email;
-    //   Global.name = name;
-    //   Navigator.push(
-    //       context, MaterialPageRoute(builder: (context) => Mensajes()));
-    //   _btnController.success();
-    // } else {
-    //   CoolAlert.show(
-    //     context: context,
-    //     type: CoolAlertType.error,
-    //     title: 'Oops...',
-    //     text: 'Algo ha salido mal :c',
-    //     loopAnimation: false,
-    //     onConfirmBtnTap: () {
-    //       _btnController.reset();
-    //       Navigator.pop(context);
-    //     },
-    //   );
-    //   _btnController.error();
-    // }
+    if (response.statusCode == 200) {
+      //almacenar de alguna manera el login
+      var dataBody = json.decode(response.body);
+      await pref.setString('nombre', dataBody["nombre"]);
+      await pref.setString('email', dataBody["email"]);
+      await pref.setString('idUser', dataBody["id"].toString());
+
+      Global.email = dataBody["email"];
+      Global.nameUser = dataBody["nombre"];
+      Global.idUser = dataBody["id"].toString();
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Mensajes()));
+      _btnController.success();
+      _btnController.reset();
+    } else {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        title: 'Oops...',
+        text: 'Algo ha salido mal :c',
+        loopAnimation: false,
+        onConfirmBtnTap: () {
+          _btnController.reset();
+          Navigator.pop(context);
+        },
+      );
+      _btnController.error();
+    }
   }
 
   String? login_guardado = "";
@@ -262,19 +264,20 @@ class _LoginPageState extends State<LoginPage> {
 
 class LoginService {
   Future<http.Response> validar(String login, String pass) async {
-    return await http.post(
-      Uri.parse('https://40fd422c6d4d.sa.ngrok.io/api/Usuarios'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{'login': login, 'pass': pass}),
+    return await http.get(
+      Uri.parse(
+          'https://5d3069c93e55.sa.ngrok.io/api/usuariosApi/GetUsuario?email=' +
+              login +
+              '&password=' +
+              pass),
     );
   }
 }
 
 class Global {
-  static String login = "";
-  static String name = "";
+  static String nameUser = "";
+  static String email = "";
+  static String idUser = "";
 }
 
 class Principal extends StatelessWidget {
@@ -284,7 +287,7 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Principal ${Global.login}"),
+          title: Text("Principal ${Global.nameUser}"),
         ),
         body: Center(
           child: const Text("ඞඞඞඞඞඞඞ login success"),
