@@ -95,12 +95,12 @@ class _MensajesState extends State<Mensajes> {
                                     iconSize: 40,
                                     color: Color(0xFF2F3542),
                                     onPressed: () {
-                                      var userId = snap.data![i].id.toString();
+                                      var postId = snap.data![i].id.toString();
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                Lugares(userID: userId)),
+                                                Lugares(postID: postId)),
                                       );
                                     }),
 
