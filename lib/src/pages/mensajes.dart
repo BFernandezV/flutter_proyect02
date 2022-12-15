@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_test/src/pages/agregar.dart';
 import 'package:login_test/src/pages/avisar.dart';
+import 'package:login_test/src/pages/detalles.dart';
 
 import 'side_bar.dart';
 
@@ -16,8 +17,8 @@ class Mensajes extends StatefulWidget {
 }
 
 class _MensajesState extends State<Mensajes> {
-  final url = Uri.parse(
-      "https://5d3069c93e55.sa.ngrok.io/Help/Api/GET-api-wuakalasApi-Getwuakalas");
+  final url =
+      Uri.parse("https://5d3069c93e55.sa.ngrok.io/api/wuakalasApi/Getwuakalas");
   late Future<List<Mensaje>> mensajes;
 
   @override
@@ -89,12 +90,18 @@ class _MensajesState extends State<Mensajes> {
                                 ),
                                 // Padding(padding: const EdgeInsets.all(value)),
                                 IconButton(
-                                  splashColor: Colors.yellow,
-                                  icon: Icon(Icons.chevron_right),
-                                  iconSize: 40,
-                                  color: Color(0xFF2F3542),
-                                  onPressed: () {},
-                                ),
+                                    splashColor: Colors.yellow,
+                                    icon: Icon(Icons.chevron_right),
+                                    iconSize: 40,
+                                    color: Color(0xFF2F3542),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Lugares()),
+                                      );
+                                    }),
 
                                 // Text(
                                 //   snap.data![i].description,
@@ -140,28 +147,29 @@ class _MensajesState extends State<Mensajes> {
   }
 
   Future<List<Mensaje>> getmensajes() async {
-    // final res = await http.get(url);
-    // final lista = List.from(jsonDecode(res.body));
-    List<Mensaje> mensajes = [
-      Mensaje(fecha: "02/03/2022", id: 0, login: "Benjamin", title: "Primero"),
-      Mensaje(fecha: "02/03/2022", id: 1, login: "Mauricio", title: "Segundo"),
-      Mensaje(fecha: "02/03/2022", id: 2, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 3, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 4, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 5, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 6, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 7, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 8, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 9, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 10, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 11, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 12, login: "Jorge", title: "Tercero"),
-      Mensaje(fecha: "02/03/2022", id: 13, login: "Jorge", title: "Tercero"),
-    ];
-    // lista.forEach((element) {
-    //   final Mensaje user = Mensaje.fromJson(element);
-    //   mensajes.add(user);
-    // });
+    final res = await http.get(url);
+    final lista = List.from(jsonDecode(res.body));
+    List<Mensaje> mensajes = [];
+    // List<Mensaje> mensajes = [
+    //   Mensaje(fecha: "02/03/2022", id: 0, login: "Benjamin", title: "Primero"),
+    //   Mensaje(fecha: "02/03/2022", id: 1, login: "Mauricio", title: "Segundo"),
+    //   Mensaje(fecha: "02/03/2022", id: 2, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 3, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 4, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 5, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 6, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 7, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 8, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 9, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 10, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 11, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 12, login: "Jorge", title: "Tercero"),
+    //   Mensaje(fecha: "02/03/2022", id: 13, login: "Jorge", title: "Tercero"),
+    // ];
+    lista.forEach((element) {
+      final Mensaje user = Mensaje.fromJson(element);
+      mensajes.add(user);
+    });
     return mensajes;
   }
 }
