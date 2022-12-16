@@ -66,15 +66,15 @@ class _NavBarState extends State<NavBar> {
               ));
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.add),
-            title: const Text('Agregar'),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Agregar(),
-              ));
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.add),
+          //   title: const Text('Agregar'),
+          //   onTap: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => Agregar(),
+          //     ));
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.group),
             title: const Text('Integrantes'),

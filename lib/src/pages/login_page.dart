@@ -266,7 +266,7 @@ class LoginService {
   Future<http.Response> validar(String login, String pass) async {
     return await http.get(
       Uri.parse(
-          'https://5d3069c93e55.sa.ngrok.io/api/usuariosApi/GetUsuario?email=' +
+          'https://882aa2605781.sa.ngrok.io/api/usuariosApi/GetUsuario?email=' +
               login +
               '&password=' +
               pass),

@@ -10,7 +10,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Agregar extends StatefulWidget {
-  const Agregar({super.key});
+  const Agregar({Key? key, required this.postID, required this.sector})
+      : super(key: key);
+
+  final String postID;
+  final String sector;
 
   @override
   State<Agregar> createState() => _AgregarState();
@@ -67,13 +71,15 @@ class _AgregarState extends State<Agregar> {
                     height: MediaQuery.of(context).size.height.round() * 0.099,
                     borderRadius: 0,
                     color: Color(0xffe9dada),
-                    child: Text('Comentar Wakala',
+                    child: Text('Me Arrepenti',
                         style: TextStyle(
                             color: Color.fromARGB(255, 255, 140, 0),
                             fontFamily: 'Pink Acapella',
                             fontSize: 20)),
                     controller: _btnController,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ],
               ),
@@ -166,7 +172,7 @@ class _AgregarState extends State<Agregar> {
         borderRadius: 0,
         height: MediaQuery.of(context).size.height.round() * 0.099,
         color: Color(0xffe9dada),
-        child: Text('Enviar mensaje',
+        child: Text('Comentar Wakala',
             style: TextStyle(
                 color: Color.fromARGB(255, 255, 140, 0),
                 fontFamily: 'Pink Acapella',
