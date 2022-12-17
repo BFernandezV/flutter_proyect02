@@ -22,8 +22,9 @@ class _LugaresState extends State<Lugares> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xffe9dada),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+        // backgroundColor: Color(0xffe9dada),
+        body: SingleChildScrollView(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
           Widget>[
         Container(
           child: FutureBuilder<Post>(
@@ -61,7 +62,7 @@ class _LugaresState extends State<Lugares> {
                             ),
                             Center(
                                 child: Padding(
-                              padding: const EdgeInsets.all(25.0),
+                              padding: const EdgeInsets.all(20.0),
                               child: Text(
                                 snapshot.data!.descripcion,
                                 style: TextStyle(
@@ -179,17 +180,14 @@ class _LugaresState extends State<Lugares> {
                             ),
                             SingleChildScrollView(
                               padding: EdgeInsets.symmetric(vertical: 10),
-                              // height: 250,
                               child: Container(
-                                height: 250,
                                 // scrollDirection: Axis.vertical,
+                                height:
+                                    MediaQuery.of(context).size.height.round() *
+                                        0.2,
                                 child: ListView.builder(
-                                    padding: EdgeInsets.only(
-                                      left: 15,
-                                      top: 15,
-                                      right: 10,
-                                      bottom: 10,
-                                    ),
+                                    padding: const EdgeInsets.only(
+                                        left: 10, top: 5, bottom: 5, right: 10),
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     itemCount:
@@ -277,7 +275,7 @@ class _LugaresState extends State<Lugares> {
               }),
         )
       ]),
-    );
+    ));
   }
 
   @override

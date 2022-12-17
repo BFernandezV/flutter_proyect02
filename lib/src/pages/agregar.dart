@@ -186,7 +186,7 @@ class _AgregarState extends State<Agregar> {
         .validar(widget.postID, descriptionController.text, idUser);
     print("Este ese el code:" + response.statusCode.toString());
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       //almacenar de alguna manera el login
       Fluttertoast.showToast(
           msg: "Mensaje enviado correctamente",
@@ -197,6 +197,7 @@ class _AgregarState extends State<Agregar> {
           textColor: Colors.white,
           fontSize: 16.0);
       _btnController.success();
+      Navigator.pop(context);
     } else {
       CoolAlert.show(
         context: context,
@@ -210,17 +211,18 @@ class _AgregarState extends State<Agregar> {
         },
       );
       _btnController.error();
-    }
+    } // print(
+    //     "-----------------------------------------------------------------------------------------------------------------");
+    // print("ESTOS SON LOS DATOS QUE LLEGAN:---------------" +
+    //     idSector +
+    //     descripcion +
+    //     idUser);
   }
 }
 
 class sendService {
   Future<http.Response> validar(
       String idSector, String descripcion, String idUser) async {
-    // print("ESTOS SON LOS DATOS QUE LLEGAN:---------------" +
-    //     idSector +
-    //     descripcion +
-    //     idUser);
     return await http.post(
       Uri.parse(
           'https://882aa2605781.sa.ngrok.io/api/comentariosApi/Postcomentario'),
@@ -228,9 +230,9 @@ class sendService {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        // 'id_wuakala': idSector,
-        // 'descripcion': descripcion,
-        // 'id_autor': idUser,
+        'id_wuakala': idSector,
+        'descripcion': descripcion,
+        'id_autor': idUser,
       }),
     );
   }

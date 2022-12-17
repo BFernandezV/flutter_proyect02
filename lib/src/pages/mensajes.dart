@@ -64,7 +64,8 @@ class _MensajesState extends State<Mensajes> {
                           // margin: EdgeInsets.all(0),
                           elevation: 10,
                           child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: const EdgeInsets.only(
+                                left: 5, top: 5, bottom: 5),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
