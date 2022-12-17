@@ -83,12 +83,17 @@ class _MensajesState extends State<Mensajes> {
                                     Row(
                                       children: [
                                         Text("por: @" + snap.data![i].login),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
                                         Text(snap.data![i].fecha),
                                       ],
                                     ),
                                   ],
                                 ),
+
                                 // Padding(padding: const EdgeInsets.all(value)),
+
                                 IconButton(
                                     splashColor: Colors.yellow,
                                     icon: Icon(Icons.chevron_right),

@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:login_test/src/pages/side_bar.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,15 +21,15 @@ class Agregar extends StatefulWidget {
 class _AgregarState extends State<Agregar> {
   @override
   late final pref;
-  String login_guardado = "";
+  late String idUser;
 
   void cargaPreferencia() async {
     pref = await SharedPreferences.getInstance();
-    login_guardado = pref.getString("usuario");
+    idUser = pref.getString("idUser");
     setState(() {});
   }
 
-  TextEditingController tituloController = TextEditingController();
+  // TextEditingController tituloController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +45,7 @@ class _AgregarState extends State<Agregar> {
                   Title(
                     color: Color.fromARGB(255, 0, 0, 0),
                     child: Text(
-                      "Lugar donde es la Cuestion",
+                      widget.sector,
                       style: TextStyle(
                           fontSize: 30,
                           color: Color.fromARGB(255, 6, 25, 237),
@@ -109,20 +107,20 @@ class _AgregarState extends State<Agregar> {
         ));
   }
 
-  Widget _titulo() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        child: TextField(
-            controller: tituloController,
-            keyboardType: TextInputType.emailAddress,
-            decoration:
-                InputDecoration(hintText: 'Titulo', border: myinputborder()),
-            onChanged: (value) {}),
-      );
-    });
-  }
+  // Widget _titulo() {
+  //   return StreamBuilder(
+  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+  //     return Container(
+  //       padding: EdgeInsets.symmetric(horizontal: 40),
+  //       child: TextField(
+  //           controller: tituloController,
+  //           keyboardType: TextInputType.emailAddress,
+  //           decoration:
+  //               InputDecoration(hintText: 'Titulo', border: myinputborder()),
+  //           onChanged: (value) {}),
+  //     );
+  //   });
+  // }
 
   Widget _descripcion() {
     return StreamBuilder(
@@ -146,7 +144,7 @@ class _AgregarState extends State<Agregar> {
       RoundedLoadingButtonController();
 
   void _doSomething() async {
-    if (tituloController.text.isEmpty || descriptionController.text.isEmpty) {
+    if (descriptionController.text.isEmpty) {
       Fluttertoast.showToast(
           msg: "Rellena todos los datos",
           toastLength: Toast.LENGTH_SHORT,
@@ -160,8 +158,7 @@ class _AgregarState extends State<Agregar> {
         _btnController.reset();
       });
     } else {
-      validarDatos(
-          tituloController.text, descriptionController.text, _btnController);
+      validarDatos(descriptionController.text, _btnController);
     }
   }
 
@@ -183,9 +180,10 @@ class _AgregarState extends State<Agregar> {
     });
   }
 
-  Future<void> validarDatos(String titulo, String text,
-      RoundedLoadingButtonController _buttonController) async {
-    final response = await sendService().validar(titulo, text, login_guardado);
+  Future<void> validarDatos(
+      String text, RoundedLoadingButtonController _buttonController) async {
+    final response = await sendService()
+        .validar(widget.postID, descriptionController.text, idUser);
     print("Este ese el code:" + response.statusCode.toString());
 
     if (response.statusCode == 201) {
@@ -218,14 +216,22 @@ class _AgregarState extends State<Agregar> {
 
 class sendService {
   Future<http.Response> validar(
-      String titulo, String texto, String login) async {
+      String idSector, String descripcion, String idUser) async {
+    // print("ESTOS SON LOS DATOS QUE LLEGAN:---------------" +
+    //     idSector +
+    //     descripcion +
+    //     idUser);
     return await http.post(
-      Uri.parse('https://40fd422c6d4d.sa.ngrok.io/api/Mensajes'),
+      Uri.parse(
+          'https://882aa2605781.sa.ngrok.io/api/comentariosApi/Postcomentario'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(
-          <String, String>{'login': login, 'titulo': titulo, 'texto': texto}),
+      body: jsonEncode(<String, String>{
+        // 'id_wuakala': idSector,
+        // 'descripcion': descripcion,
+        // 'id_autor': idUser,
+      }),
     );
   }
 }

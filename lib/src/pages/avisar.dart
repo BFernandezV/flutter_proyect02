@@ -34,6 +34,7 @@ class _AvisarState extends State<Avisar> {
   void cargaPreferencia() async {
     pref = await SharedPreferences.getInstance();
     idUser = pref.getString("idUser");
+    // print("este es el id: " + idUser);
     setState(() {});
   }
 
