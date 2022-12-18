@@ -17,6 +17,8 @@ class Lugares extends StatefulWidget {
 }
 
 class _LugaresState extends State<Lugares> {
+  late int uno;
+  late int dos;
   late Future<Post> response;
 
   @override
@@ -32,6 +34,10 @@ class _LugaresState extends State<Lugares> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Container(
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/back2cats.jpg'),
+                              fit: BoxFit.cover)),
                       height: MediaQuery.of(context).size.height,
                       child: Padding(
                         padding: const EdgeInsets.all(0),
@@ -85,8 +91,12 @@ class _LugaresState extends State<Lugares> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  FotoLugar()),
+                                              builder: (context) => FotoLugar(
+                                                    urlimg: snapshot
+                                                        .data!.url_foto1,
+                                                    sector:
+                                                        snapshot.data!.sector,
+                                                  )),
                                         );
                                       }),
                                   MaterialButton(
@@ -98,8 +108,12 @@ class _LugaresState extends State<Lugares> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  FotoLugar()),
+                                              builder: (context) => FotoLugar(
+                                                    urlimg: snapshot
+                                                        .data!.url_foto2,
+                                                    sector:
+                                                        snapshot.data!.sector,
+                                                  )),
                                         );
                                       }),
                                 ],
@@ -116,13 +130,17 @@ class _LugaresState extends State<Lugares> {
                                       minWidth: 25,
                                       disabledColor: Colors.amber,
                                       child: Text("Sigue ahi? (" +
-                                          snapshot.data!.sigue_ahi.toString() +
+                                          uno.toString() +
                                           ")"),
                                       splashColor:
                                           Color.fromARGB(255, 255, 7, 226),
                                       color: Color(0xffe9dada),
                                       onPressed: () {
                                         print("Hola Raised Button");
+                                        validarmas(
+                                            snapshot.data!.id.toString());
+                                        uno++;
+                                        setState(() {});
                                       },
                                     ),
                                     SizedBox(
@@ -133,13 +151,16 @@ class _LugaresState extends State<Lugares> {
                                       minWidth: 25,
                                       disabledColor: Colors.amber,
                                       child: Text("Ya no esta (" +
-                                          snapshot.data!.ya_no_esta.toString() +
+                                          dos.toString() +
                                           ")"),
                                       splashColor:
                                           Color.fromARGB(255, 255, 7, 226),
                                       color: Color(0xffe9dada),
                                       onPressed: () {
-                                        print("Hola Raised Button");
+                                        validarmenos(
+                                            snapshot.data!.id.toString());
+                                        dos++;
+                                        setState(() {});
                                       },
                                     ),
                                   ],
@@ -299,6 +320,36 @@ class _LugaresState extends State<Lugares> {
     post.url_foto2 =
         'https://882aa2605781.sa.ngrok.io/images/' + post.url_foto2;
     print(post.comentarios);
+    uno = post.sigue_ahi;
+    dos = post.ya_no_esta;
     return post;
   }
+}
+
+Future<http.Response> validarmas(String id) async {
+  return await http.put(
+    Uri.parse(
+        'https://882aa2605781.sa.ngrok.io/api/wuakalasApi/PutSigueAhi?id=' +
+            id),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'id': id,
+    }),
+  );
+}
+
+Future<http.Response> validarmenos(String id) async {
+  return await http.put(
+    Uri.parse(
+        'https://882aa2605781.sa.ngrok.io/api/wuakalasApi/PutYanoEsta?id=' +
+            id),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'id': id,
+    }),
+  );
 }
