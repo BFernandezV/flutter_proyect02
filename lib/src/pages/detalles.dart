@@ -29,6 +29,7 @@ class _LugaresState extends State<Lugares> {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
           Widget>[
         Container(
+          alignment: Alignment.center,
           child: FutureBuilder<Post>(
               future: response,
               builder: (context, snapshot) {
@@ -211,6 +212,7 @@ class _LugaresState extends State<Lugares> {
                                                   postID: snapshot.data!.id
                                                       .toString(),
                                                   sector: snapshot.data!.sector,
+                                                  refreshFunction: refreshData,
                                                 )),
                                       );
                                     },
@@ -320,7 +322,11 @@ class _LugaresState extends State<Lugares> {
                         ),
                       ));
                 }
-                return CircularProgressIndicator();
+                return Container(
+                    height: MediaQuery.of(context).size.height.round() * 1,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator()));
               }),
         )
       ]),
@@ -330,9 +336,13 @@ class _LugaresState extends State<Lugares> {
   @override
   void initState() {
     super.initState();
-    print("Este es el postId " + widget.postID);
     response = getDataPost();
     // comments = getmensajes();
+  }
+
+  void refreshData() {
+    response = getDataPost();
+    setState(() {});
   }
 
   Future<Post> getDataPost() async {
@@ -357,7 +367,7 @@ class _LugaresState extends State<Lugares> {
 Future<http.Response> validarmas(String id) async {
   return await http.put(
     Uri.parse(
-        'https://882aa2605781.sa.ngrok.io/api/wuakalasApi/PutSigueAhi?id=' +
+        'https://d22292e4f79c.sa.ngrok.io/api/wuakalasApi/PutSigueAhi?id=' +
             id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -371,7 +381,7 @@ Future<http.Response> validarmas(String id) async {
 Future<http.Response> validarmenos(String id) async {
   return await http.put(
     Uri.parse(
-        'https://882aa2605781.sa.ngrok.io/api/wuakalasApi/PutYanoEsta?id=' +
+        'https://d22292e4f79c.sa.ngrok.io/api/wuakalasApi/PutYanoEsta?id=' +
             id),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:camera/camera.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:login_test/models/mensaje.dart';
 import 'dart:io';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:http/http.dart' as http;
@@ -14,14 +15,16 @@ import 'package:login_test/src/pages/cameraPage.dart';
 import 'dart:typed_data';
 
 class Avisar extends StatefulWidget {
-  const Avisar({super.key});
+  const Avisar({Key? key, required this.addPost}) : super(key: key);
+
+  final Function addPost;
 
   @override
   State<Avisar> createState() => _AvisarState();
 }
 
-late XFile _cameraPhoto1;
-late XFile _cameraPhoto2;
+XFile _cameraPhoto1 = new XFile("");
+XFile _cameraPhoto2 = new XFile("");
 TextEditingController sectorController = TextEditingController();
 TextEditingController descriptionController = TextEditingController();
 bool _loadPhoto1 = false;
@@ -268,8 +271,15 @@ class _AvisarState extends State<Avisar> {
         _btnController.reset();
       });
     } else {
-      Uint8List imgbytes1 = await _cameraPhoto1.readAsBytes();
-      Uint8List imgbytes2 = await _cameraPhoto2.readAsBytes();
+      Uint8List imgbytes1 = Uint8List(0);
+      Uint8List imgbytes2 = Uint8List(0);
+      if (_cameraPhoto1.path != '') {
+        imgbytes1 = await _cameraPhoto1.readAsBytes();
+      }
+      if (_cameraPhoto2.path != '') {
+        imgbytes2 = await _cameraPhoto2.readAsBytes();
+      }
+
       String bs4str1 = base64.encode(imgbytes1);
       String bs4str2 = base64.encode(imgbytes2);
       validarDatos(sectorController.text, descriptionController.text,
@@ -297,6 +307,7 @@ class _AvisarState extends State<Avisar> {
           textColor: Colors.white,
           fontSize: 16.0);
       _btnController.success();
+      widget.addPost();
     } else {
       CoolAlert.show(
         context: context,

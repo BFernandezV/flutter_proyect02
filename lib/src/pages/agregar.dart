@@ -8,11 +8,16 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Agregar extends StatefulWidget {
-  const Agregar({Key? key, required this.postID, required this.sector})
+  const Agregar(
+      {Key? key,
+      required this.postID,
+      required this.sector,
+      required this.refreshFunction})
       : super(key: key);
 
   final String postID;
   final String sector;
+  final Function refreshFunction;
 
   @override
   State<Agregar> createState() => _AgregarState();
@@ -81,12 +86,12 @@ class _AgregarState extends State<Agregar> {
                 // ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Column(
                       children: [
                         MaterialButton(
                           elevation: 10,
-                          height: 80,
+                          height: 70,
                           minWidth: 400,
                           // MediaQuery.of(context).size.height.round() * 0.099,
                           // borderRadius: 0,
@@ -226,6 +231,7 @@ class _AgregarState extends State<Agregar> {
           textColor: Colors.white,
           fontSize: 16.0);
       _btnController.success();
+      widget.refreshFunction();
       Navigator.pop(context);
     } else {
       CoolAlert.show(

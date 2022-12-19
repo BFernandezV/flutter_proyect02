@@ -3,11 +3,8 @@ import 'dart:convert';
 import 'package:login_test/models/mensaje.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_test/src/pages/agregar.dart';
 import 'package:login_test/src/pages/avisar.dart';
 import 'package:login_test/src/pages/detalles.dart';
-
-import 'side_bar.dart';
 
 class Mensajes extends StatefulWidget {
   const Mensajes({super.key});
@@ -57,66 +54,81 @@ class _MensajesState extends State<Mensajes> {
                       shrinkWrap: true,
                       itemCount: snap.data!.length,
                       itemBuilder: (context, i) {
-                        return Card(
-                          color: Color(0xFFFDCB6E),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          // margin: EdgeInsets.all(0),
-                          elevation: 10,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 5, top: 5, bottom: 5),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // SizedBox(height: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      snap.data![i].title,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text("por: @" + snap.data![i].login),
-                                        SizedBox(
-                                          width: 10,
+                        return MaterialButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {
+                            var postId = snap.data![i].id.toString();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Lugares(postID: postId)),
+                            );
+                          },
+                          child: Card(
+                            color: Color(0xFFFDCB6E),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            // margin: EdgeInsets.all(0),
+                            elevation: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5, top: 5, bottom: 5),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // SizedBox(height: 10),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        snap.data![i].title,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
                                         ),
-                                        Text(snap.data![i].fecha),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("por: @" + snap.data![i].login),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(snap.data![i].fecha),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
 
-                                // Padding(padding: const EdgeInsets.all(value)),
+                                  // Padding(padding: const EdgeInsets.all(value)),
 
-                                IconButton(
-                                    splashColor: Colors.yellow,
-                                    icon: Icon(Icons.chevron_right),
-                                    iconSize: 40,
-                                    color: Color(0xFF2F3542),
-                                    onPressed: () {
-                                      var postId = snap.data![i].id.toString();
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Lugares(postID: postId)),
-                                      );
-                                    }),
+                                  IconButton(
+                                      splashColor: Colors.yellow,
+                                      icon: Icon(Icons.chevron_right),
+                                      iconSize: 40,
+                                      color: Color(0xFF2F3542),
+                                      onPressed: () {
+                                        var postId =
+                                            snap.data![i].id.toString();
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Lugares(postID: postId)),
+                                        );
+                                      }),
 
-                                // Text(
-                                //   snap.data![i].description,
-                                //   style: TextStyle(),
-                                // ),
-                                // SizedBox(height: 10),
-                                // Divider(),
-                              ],
+                                  // Text(
+                                  //   snap.data![i].description,
+                                  //   style: TextStyle(),
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Divider(),
+                                ],
+                              ),
                             ),
                           ),
                         );
@@ -137,7 +149,9 @@ class _MensajesState extends State<Mensajes> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => Avisar(),
+              builder: (context) => Avisar(
+                addPost: appendElements,
+              ),
             ),
           );
         },
@@ -151,6 +165,11 @@ class _MensajesState extends State<Mensajes> {
   void initState() {
     super.initState();
     mensajes = getmensajes();
+  }
+
+  void appendElements() {
+    mensajes = getmensajes();
+    setState(() {});
   }
 
   Future<List<Mensaje>> getmensajes() async {
