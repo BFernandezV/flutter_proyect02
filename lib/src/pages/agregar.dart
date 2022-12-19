@@ -32,59 +32,83 @@ class _AgregarState extends State<Agregar> {
   // TextEditingController tituloController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xffe9dada),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Title(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    child: Text(
-                      widget.sector,
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Color.fromARGB(255, 6, 25, 237),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Pink Acapella'),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  _descripcion(),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  _button_enviar(),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  RoundedLoadingButton(
-                    height: MediaQuery.of(context).size.height.round() * 0.099,
-                    borderRadius: 0,
-                    color: Color(0xffe9dada),
-                    child: Text('Me Arrepenti',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 140, 0),
-                            fontFamily: 'Pink Acapella',
-                            fontSize: 20)),
-                    controller: _btnController,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
+    return Scaffold(
+      backgroundColor: Color(0xffe9dada),
+      body: Container(
+          child: SingleChildScrollView(
+              child: Container(
+        height: MediaQuery.of(context).size.height.round() * 1,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/back2cats.jpg'),
+                fit: BoxFit.cover)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 70, bottom: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(20)),
+                color: Color(0xffe9dada),
+              ),
+              child: Title(
+                color: Color.fromARGB(255, 0, 0, 0),
+                child: Text(
+                  widget.sector,
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 6, 25, 237),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Pink Acapella'),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
+            // SizedBox(
+            //   height: 25.0,
+            // ),
+            _descripcion(),
+            // SizedBox(
+            //   height: 15.0,
+            // ),
+            Column(
+              children: [
+                _button_enviar(),
+                // SizedBox(
+                //   height: 15.0,
+                // ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      children: [
+                        MaterialButton(
+                          height: 80,
+                          minWidth: 400,
+                          // MediaQuery.of(context).size.height.round() * 0.099,
+                          // borderRadius: 0,
+                          color: Color(0xffe9dada),
+                          child: Text('Me Arrepenti',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 140, 0),
+                                  fontFamily: 'Pink Acapella',
+                                  fontSize: 20)),
+                          // controller: _btnController,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
-      ),
+      ))),
     );
   }
 
@@ -165,18 +189,22 @@ class _AgregarState extends State<Agregar> {
   Widget _button_enviar() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return RoundedLoadingButton(
-        borderRadius: 0,
-        height: MediaQuery.of(context).size.height.round() * 0.099,
-        color: Color(0xffe9dada),
-        child: Text('Comentar Wakala',
-            style: TextStyle(
-                color: Color.fromARGB(255, 255, 140, 0),
-                fontFamily: 'Pink Acapella',
-                fontSize: 20)),
-        controller: _btnController,
-        onPressed: _doSomething,
-      );
+      return Container(
+          padding: const EdgeInsets.all(25.0),
+          child: RoundedLoadingButton(
+            elevation: 10,
+            width: 400,
+            borderRadius: 0,
+            height: MediaQuery.of(context).size.height.round() * 0.099,
+            color: Color(0xffe9dada),
+            child: Text('Comentar Wakala',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 140, 0),
+                    fontFamily: 'Pink Acapella',
+                    fontSize: 20)),
+            controller: _btnController,
+            onPressed: _doSomething,
+          ));
     });
   }
 
@@ -225,7 +253,7 @@ class sendService {
       String idSector, String descripcion, String idUser) async {
     return await http.post(
       Uri.parse(
-          'https://882aa2605781.sa.ngrok.io/api/comentariosApi/Postcomentario'),
+          'https://d22292e4f79c.sa.ngrok.io/api/comentariosApi/Postcomentario'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

@@ -319,7 +319,7 @@ class sendService {
       String idUser, String image1, String image2) async {
     return await http.post(
       Uri.parse(
-          'https://5d3069c93e55.sa.ngrok.io/api/wuakalasApi/Postwuakalas/'),
+          'https://d22292e4f79c.sa.ngrok.io/api/wuakalasApi/Postwuakalas/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

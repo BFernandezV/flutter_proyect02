@@ -18,7 +18,7 @@ class Mensajes extends StatefulWidget {
 
 class _MensajesState extends State<Mensajes> {
   final url =
-      Uri.parse("https://882aa2605781.sa.ngrok.io/api/wuakalasApi/Getwuakalas");
+      Uri.parse("https://d22292e4f79c.sa.ngrok.io/api/wuakalasApi/Getwuakalas");
   late Future<List<Mensaje>> mensajes;
 
   @override

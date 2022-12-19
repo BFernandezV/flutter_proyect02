@@ -126,12 +126,16 @@ class _LugaresState extends State<Lugares> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     MaterialButton(
+                                      elevation: 10,
                                       height: 50,
                                       minWidth: 25,
                                       disabledColor: Colors.amber,
-                                      child: Text("Sigue ahi? (" +
-                                          uno.toString() +
-                                          ")"),
+                                      child: Text(
+                                        "Sigue ahi? (" + uno.toString() + ")",
+                                        style: TextStyle(
+                                            fontFamily: 'Delight Snowy'),
+                                        textAlign: TextAlign.center,
+                                      ),
                                       splashColor:
                                           Color.fromARGB(255, 255, 7, 226),
                                       color: Color(0xffe9dada),
@@ -147,12 +151,16 @@ class _LugaresState extends State<Lugares> {
                                       width: 55,
                                     ),
                                     MaterialButton(
+                                      elevation: 10,
                                       height: 50.0,
                                       minWidth: 25,
                                       disabledColor: Colors.amber,
-                                      child: Text("Ya no esta (" +
-                                          dos.toString() +
-                                          ")"),
+                                      child: Text(
+                                        "Ya no esta (" + dos.toString() + ")",
+                                        style: TextStyle(
+                                            fontFamily: 'Delight Snowy'),
+                                        textAlign: TextAlign.center,
+                                      ),
                                       splashColor:
                                           Color.fromARGB(255, 255, 7, 226),
                                       color: Color(0xffe9dada),
@@ -171,15 +179,26 @@ class _LugaresState extends State<Lugares> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("comentarios"),
+                                  Text(
+                                    "comentarios",
+                                    style:
+                                        TextStyle(fontFamily: 'Delight Snowy'),
+                                    textAlign: TextAlign.center,
+                                  ),
                                   SizedBox(
                                     width: 100,
                                   ),
                                   MaterialButton(
+                                    elevation: 10,
                                     height: 30.0,
                                     minWidth: 25,
                                     disabledColor: Colors.amber,
-                                    child: Text("Comentar"),
+                                    child: Text(
+                                      "Comentar",
+                                      style: TextStyle(
+                                          fontFamily: 'Delight Snowy'),
+                                      textAlign: TextAlign.center,
+                                    ),
                                     splashColor:
                                         Color.fromARGB(255, 255, 7, 226),
                                     color: Color(0xffe9dada),
@@ -277,16 +296,25 @@ class _LugaresState extends State<Lugares> {
                                     }),
                               ),
                             ),
-                            MaterialButton(
-                              height: 50.0,
-                              minWidth: 822,
-                              disabledColor: Colors.amber,
-                              child: Text("Volver al Listado"),
-                              splashColor: Color.fromARGB(255, 255, 7, 226),
-                              color: Color(0xffe9dada),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: MaterialButton(
+                                elevation: 10,
+                                height: 60.0,
+                                minWidth: 822,
+                                disabledColor: Colors.amber,
+                                child: Text(
+                                  "Volver al Listado",
+                                  style: TextStyle(fontFamily: 'Delight Snowy'),
+                                  textAlign: TextAlign.center,
+                                ),
+                                splashColor: Color.fromARGB(255, 255, 7, 226),
+                                color: Color(0xffe9dada),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -309,16 +337,14 @@ class _LugaresState extends State<Lugares> {
 
   Future<Post> getDataPost() async {
     final res = await http.get(Uri.parse(
-        'https://882aa2605781.sa.ngrok.io/api/wuakalasApi/Getwuakala?id=' +
+        'https://d22292e4f79c.sa.ngrok.io/api/wuakalasApi/Getwuakala?id=' +
             widget.postID.toString()));
 
     final body = json.decode(res.body);
 
     final Post post = Post.fromJson(body);
-    post.url_foto1 =
-        'https://882aa2605781.sa.ngrok.io/images/' + post.url_foto1;
-    post.url_foto2 =
-        'https://882aa2605781.sa.ngrok.io/images/' + post.url_foto2;
+    post.url_foto1 = 'https://d22292e4f79c.sa.ngrok.io/' + post.url_foto1;
+    post.url_foto2 = 'https://d22292e4f79c.sa.ngrok.io/' + post.url_foto2;
     print(post.comentarios);
     uno = post.sigue_ahi;
     dos = post.ya_no_esta;
