@@ -343,8 +343,10 @@ class _LugaresState extends State<Lugares> {
     final body = json.decode(res.body);
 
     final Post post = Post.fromJson(body);
-    post.url_foto1 = 'https://d22292e4f79c.sa.ngrok.io/' + post.url_foto1;
-    post.url_foto2 = 'https://d22292e4f79c.sa.ngrok.io/' + post.url_foto2;
+    post.url_foto1 =
+        'https://d22292e4f79c.sa.ngrok.io/images/' + post.url_foto1;
+    post.url_foto2 =
+        'https://d22292e4f79c.sa.ngrok.io/images/' + post.url_foto2;
     print(post.comentarios);
     uno = post.sigue_ahi;
     dos = post.ya_no_esta;
